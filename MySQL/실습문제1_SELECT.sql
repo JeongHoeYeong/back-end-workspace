@@ -54,7 +54,7 @@ FROM customer_list
 order by id
 LIMIT 5, 10;
 -- 7. actor 테이블에서 J로 시작하는 이름과 글자수 조회 (공백 X, 정렬은 글자수가 많은 사람 순으로)
-SELECT concat(first_name, ' ',last_name) as '이름',
+SELECT concat(first_name, ' ', last_name) as '이름',
 char_length(concat(first_name, last_name)) as '글자수'
 FROM actor
 -- WHERE substr(first_name, 1, 1) = 'J'
