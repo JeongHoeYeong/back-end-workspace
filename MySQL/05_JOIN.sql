@@ -331,8 +331,8 @@ FROM employee
 JOIN department ON (dept_code = dept_id)
 JOIN location ON (location_id = local_code)
 JOIN national USING (national_code)
-WHERE national_name ='한국' or national_name='일본';
-
+-- WHERE national_name ='한국' or national_name='일본';
+WHERE national_name IN ('한국', '일본');
 
 -- 5. 각 부서별 평균 급여를 조회하여 부서명, 평균 급여(format 사용)를 조회
 --    단, 부서 코드가 없는 사원들의 평균도 같이 나오게끔! OUTER JOIN
@@ -342,7 +342,7 @@ LEFT JOIN department ON (dept_code = dept_id)
 GROUP BY dept_code;
 
 -- 6. 각 부서별 총 급여의 합이 1000만원 이상인 부서명, 급여의 합을 조회
-SELECT dept_title, sum(salary)
+SELECT dept_title, format(sum(salary),0)
 FROM employee
 JOIN department ON (dept_code = dept_id)
 GROUP BY dept_code
@@ -354,17 +354,30 @@ HAVING sum(salary) >= 10000000;
 --    급여 등급이 S3, S4인 경우 '중급'
 --    급여 등급이 S5, S6인 경우 '초급;
 SELECT emp_id, emp_name, job_name, sal_level,
-if (sal_level = 'S1' or sal_level = 'S2', '고급', 
-if (sal_level = 'S3' or sal_level = 'S4', '중급', '초급')) as '급여 구분'
+-- if (sal_level = 'S1' or sal_level = 'S2', '고급', 
+-- if (sal_level = 'S3' or sal_level = 'S4', '중급', '초급')) as '급여 구분'
+CASE 
+	WHEN sal_level IN ('S1', 'S2') THEN '고급'
+	WHEN sal_level IN ('S3', 'S4') THEN '중급'
+    ELSE '초급'
+END
 FROM employee
 JOIN job USING (job_code)
 JOIN sal_grade ON (salary between min_sal and max_sal);
 
 -- 8. 보너스를 받지 않은 직원들 중 직급 코드가 J4 또는 J7인 직원들의 직원명, 직급명, 급여를 조회
+-- >> WHERE 구문
+SELECT emp_name, job_name, salary, e.job_code
+FROM employee e , job j
+WHERE e.job_code = j.job_code
+AND e.job_code IN ('J4', 'J7')
+AND bonus IS null;
+
+-- >> ANSI 구문
 SELECT emp_name, job_name, salary, job_code
 FROM employee
 JOIN job USING (job_code)
-WHERE job_code = 'J4' or job_code = 'J7'
+WHERE job_code IN ('J4', 'J7')
 AND bonus IS null;
 
 -- 9. 부서가 있는 직원들의 직원명, 직급명, 부서명, 근무 지역을 조회
@@ -373,6 +386,9 @@ FROM employee
 JOIN department ON(dept_code = dept_id)
 JOIN job USING (job_code)
 JOIN location ON (location_id = local_code);
+
+-- >> where 구문
+
 
 -- 10. 해외영업팀에 근무하는 직원들의 직원명, 직급명, 부서코드, 부서명을 조회
 SELECT emp_name, job_name, dept_code, dept_title
