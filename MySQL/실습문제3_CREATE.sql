@@ -6,7 +6,7 @@
 --           pub_name(출판사명) -- NOT NULL
 --           phone(전화번호)
 CREATE TABLE tb_publisher(
-pub_no INT PRIMARY KEY,
+pub_no INT AUTO_INCREMENT PRIMARY KEY,
 pub_name VARCHAR(20) NOT NULL,
 phone VARCHAR(13)
 );
@@ -23,7 +23,7 @@ SELECT * FROM tb_publisher;
 --           bk_pub_no(출판사 번호) -- 외래 키(tb_publisher 테이블을 참조하도록)
 --    조건 : 이때 참조하고 있는 부모 데이터 삭제 시 자식 데이터도 삭제 되도록 옵션 지정
 create table tb_book(
-bk_no int primary key,
+bk_no int auto_increment primary key,
 bk_title varchar(20) not null,
 bk_author varchar(20) not null,
 bk_price int,
@@ -48,14 +48,14 @@ SELECT * FROM tb_book;
 --           status(탈퇴여부)     -- 기본값 'N' / 'Y' 혹은 'N'만 입력되도록 제약조건
 --           enroll_date(가입일)  -- 기본값 현재날짜
 create table tb_member(
-member_no int primary key,
+member_no int auto_increment primary key,
 member_id varchar(20) unique,
 member_pwd varchar(20) not null,
 member_name varchar(20) not null,
-gender varchar(3) check(gender in('M', 'F')),
+gender varchar(1) check(gender in('M', 'F')),
 address varchar(20),
 phone varchar(20),
-status varchar(3) check(status in('N','Y')) default 'N',
+status varchar(1) check(status in('N','Y')) default 'N',
 enroll_date date default (current_date)
 );
 insert into tb_member values (1, 'user01', 'pass01', '홍길동', 'M', '서울시 강서구', '010-1111-2222', 'N', default);
@@ -71,7 +71,7 @@ select * from tb_member;
 --    조건 : 이때 부모 데이터 삭제 시 NULL 값이 되도록 옵션 설정
 
 create table tb_rent (
-rent_no int primary key,
+rent_no int auto_increment primary key,
 rent_mem_no int,
 rent_book_no int,
 rent_date date default (current_date),
