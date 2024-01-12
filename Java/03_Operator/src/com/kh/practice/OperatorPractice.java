@@ -50,8 +50,8 @@ public class OperatorPractice {
 		System.out.print("정수를 입력 > ");
 		int number = sc.nextInt();
 		
-		String s = number % 2 == 0 ? "짝수다" : "홀수다";
-		System.out.println(s);
+		String result = number % 2 == 0 ? "짝수다" : "홀수다";
+		System.out.println(result);
 	}
 	
 	//나이를 키보드로 입력 받아 어린이(13세 이하)인지, 청소년(13세 초과 ~ 19세 이하)인지, 성인(19세 초과)인지 출력하세요.
@@ -59,10 +59,10 @@ public class OperatorPractice {
 		System.out.print("나이를 입력 > ");
 		int age = sc.nextInt();
 		
-		String s = (age <= 13) ? "어린이(13세 이하)" :
-			       (age >13 && age <= 19) ? "청소년(13세 초과 ~ 19세 이하)" :
+		String result = (age <= 13) ? "어린이(13세 이하)" :
+			       (age <= 19) ? "청소년(13세 초과 ~ 19세 이하)" :
 			      "성인(19세 초과)";
-		System.out.println(s);
+		System.out.println(result);
 	}
 	
 	//키보드로 사과의 개수와 바구니의 크기(바구니 1개의 들어가는 사과의 개수)를 입력받아
@@ -73,8 +73,10 @@ public class OperatorPractice {
 		System.out.print("바구니의 크기 > ");
 		int basket = sc.nextInt();
 		
+		int count = apple / basket;
+		
 		System.out.printf
-		("필요한 바구니의 수 : %d", apple % basket == 0 ? (apple / basket) : (apple / basket + 1));
+		("필요한 바구니의 수 : %d", apple % basket == 0 ? count : (count+ 1));
 	}
 	
 }
