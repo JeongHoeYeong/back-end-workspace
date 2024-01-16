@@ -70,18 +70,22 @@ public class ConditionPractice {
     	System.out.print("피자 조각 수 : ");
     	int piece = sc.nextInt();
     	System.out.print("피자 먹는 사람 수 : ");
-    	int person = sc.nextInt();
+    	int person = sc.nextInt();   
     	
-    	if(piece >= 2 && piece <=10) {
-    	for(int i=1; ; i++) {
-    		if(i*piece/person>=1) {
-    			System.out.println(i);
-    			break;
-    			}
-    	   }
-    	}
-    				
-    }
+    	int count = piece / person;
+    	
+    	System.out.printf
+		("%d", piece % person == 0 ? count : (count+ 1));
+//    	
+//    	if(piece >= 2 && piece <= 10) {
+//    		for(int i = 1; i <= 0.5 * person; i++) {
+//    			if(i*piece/person >= 1) {
+//    				System.out.println(i);
+//    				break;
+//    			}
+//    		}
+//    	}
+}
 
     /*
         4. 국어, 영어, 수학 세 과목의 점수를 키보드로 입력 받고 합계와 평균을 계산하고 합계와 평균을 이용하여 합격 / 불합격 처리하는 기능을 구현하세요.
@@ -249,32 +253,39 @@ public class ConditionPractice {
     public void practice9() {
     	System.out.print("숫자 입력 : ");
     	int num1 = Integer.parseInt(sc.nextLine());
-    	System.out.print("숫자 입력 : ");
-    	int num2 = Integer.parseInt(sc.nextLine());
-    	System.out.print("연산자를 입력(+,-,*,/,%) : ");
-    	char op = sc.nextLine().charAt(0);
-    	
-    	switch (op) {
-    	case '+' :
-    		System.out.printf("%d %c %d = %d", num1, op, num2, num1 + num2);
-    		break;
-    	case '-' :
-    		System.out.printf("%d %c %d = %d", num1, op, num2, num1 - num2);
-    		break;
-    	case '*' :
-    		System.out.printf("%d %c %d = %d", num1, op, num2, num1 * num2);
-    		break;
-    	case '/' :
-    		System.out.printf("%d %c %d = %d", num1, op, num2, num1 / num2);
-    		break;
-    	case '%' :
-    		System.out.printf("%d %c %d = %d", num1, op, num2, num1 % num2);
-    		break;
-    	default:
+    	if(num1 <= 0) {
     		System.out.println("잘못 입력하셨습니다. 프로그램을 종료합니다.");
+    	} else {
+    		System.out.print("숫자 입력 : ");
+        	int num2 = Integer.parseInt(sc.nextLine());
+        	if(num2 <= 0) {
+        		System.out.println("잘못 입력하셨습니다. 프로그램을 종료합니다.");
+        	} else {
+        		System.out.print("연산자를 입력(+,-,*,/,%) : ");
+            	char op = sc.nextLine().charAt(0);
+            	
+            	switch (op) {
+            	case '+' :
+            		System.out.printf("%d %c %d = %d", num1, op, num2, num1 + num2);
+            		break;
+            	case '-' :
+            		System.out.printf("%d %c %d = %d", num1, op, num2, num1 - num2);
+            		break;
+            	case '*' :
+            		System.out.printf("%d %c %d = %d", num1, op, num2, num1 * num2);
+            		break;
+            	case '/' :
+            		System.out.printf("%d %c %d = %d", num1, op, num2, num1 / num2);
+            		break;
+            	case '%' :
+            		System.out.printf("%d %c %d = %d", num1, op, num2, num1 % num2);
+            		break;
+            	default:
+            		System.out.println("잘못 입력하셨습니다. 프로그램을 종료합니다.");
+        		}
+        	}
     	}
     }
-
     /*
       10. 아래 예시와 같이 메뉴를 출력하고 메뉴 번호를 누르면 “OO메뉴입니다“를, 종료 번호를 누르면 “프로그램이 종료됩니다.”를 출력하세요
 
@@ -381,13 +392,14 @@ public class ConditionPractice {
     	if(sum >= 70 && att >= 20 * 0.7) {
    		System.out.printf("중간 고사 점수(20) : %f\n기말 고사 점수(30) : %f\n과제 점수(30) : %f\n출석 점수(20) : %f\n총점 : %f\nPASS",
    				score1, score2, score3, score4, sum);
-    	}else if (sum < 70 && att <= 20 * 0.7) {
-    		System.out.printf("FAIL [출석 횟수 부족] (%d/20)\nFAIL [점수 미달] (총점 %.1f)", att, sum);
-    	}else if (sum < 70) {
-    		System.out.printf("FAIL [점수 미달] (총점 %.1f)",sum);
-    	}else if (att <= 20 * 0.7) {
-    		System.out.printf("FAIL [출석 횟수 부족] (%d/20)", att);
+    	}else {
+    		if (att <= 20 * 0.7) {
+        		System.out.printf("FAIL [출석 횟수 부족] (%d/20)\n", att);
+    		}
+    		if (sum< 70) {
+        		System.out.printf("FAIL [점수 미달] (총점 %.1f)",sum);
+        		}
+    		}
     	}
-    }
-    
 }
+

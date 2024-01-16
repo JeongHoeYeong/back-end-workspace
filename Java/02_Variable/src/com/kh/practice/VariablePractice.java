@@ -8,16 +8,21 @@ public class VariablePractice {
 
 	public static void main(String[] args) {
 		VariablePractice v = new VariablePractice();
-		v.method1();
+		v.method3();
 	}
 
 	public void method1() {
-		int ad = 10000;
-		int ch = 7000;
+		int adultPrice = 10000;
+		int teenPrice = 7000;
+		int adultCount = 2;
+		int teenCount = 3; 
+		
+		int adultTotal = adultPrice * adultCount;
+		int teenTotal = teenPrice * teenCount;
 
-		System.out.println("성인 2명 :" + 2 * ad + "원");
-		System.out.println("청소년 3명 :" + 3 * ch + "원\n");
-		System.out.println("총 금액 : " + (2 * ad + 3 * ch) + "원");
+		System.out.printf("성인 %d명 : %d원\n", adultCount, adultTotal);
+		System.out.printf("성인 %d명 : %d원\n", teenCount, teenTotal);
+		System.out.printf("총 금액 : %d원", adultTotal + teenTotal);
 	}
 
 	public void method2() {
@@ -39,10 +44,8 @@ public class VariablePractice {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.print("문자열을 입력하세요 : ");
-		String input = sc.nextLine();
-		char c1 = input.charAt(0);
-		char c2 = input.charAt(input.length() - 1);
-		System.out.println("첫번째 문자 : " + c1);
-		System.out.println("마지막 문자 : " + c2);
+		String str = sc.nextLine();
+		System.out.println("첫번째 문자 : " + str.charAt(0));
+		System.out.println("마지막 문자 : " + str.charAt(str.length() - 1));
 	}
 }
