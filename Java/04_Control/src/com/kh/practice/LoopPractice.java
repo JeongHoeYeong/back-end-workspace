@@ -9,7 +9,7 @@ class LoopPractice {
 	public static void main(String[] args) {
 			
 		LoopPractice p = new LoopPractice();
-		p.method5();
+		p.method6();
 
 	}
 
