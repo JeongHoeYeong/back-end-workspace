@@ -34,6 +34,8 @@ public class Application {
 		System.out.println(eg2);
 		System.out.println(m2);
 		System.out.println(s2);
+		
+		// 다형성 + 객체 배열
 	}
 
 }
