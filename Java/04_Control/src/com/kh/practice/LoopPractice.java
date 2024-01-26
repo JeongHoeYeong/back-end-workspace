@@ -1,5 +1,6 @@
 package com.kh.practice;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 class LoopPractice {
@@ -35,19 +36,16 @@ class LoopPractice {
     // 2. 1+(-2)+3+(-4)+...과 같은 식으로 계속 더해나갔을 때, 몇까지 더해야 총합이 100 이상 되는지 출력하시오.
     public void method2() {
     	int sum = 0;
-    	int i = 0;
-    	while(true) {
-    		i++;
-    		if(i % 2 == 0) {
-    			sum -=i;
-    		} else if (i % 2 != 0){
-    			sum += i;
-    		}
-    		if(sum >= 100) {
-    			System.out.println(i);
-    			break;
-    		}
+    	int num = 0;
+    	while(sum < 100) {
+    		num++;
+    		if(num % 2 == 0) {
+    			sum -=num;
+    		} else if (num % 2 != 0){
+    			sum += num;
+    		}	
     	}
+    	System.out.println("총합이 100 이상이 되려면 " + num + "까지 더해야 한다");
     }
 
     /*
@@ -67,12 +65,19 @@ class LoopPractice {
     	System.out.print("문자 : ");
     	char ch = sc.nextLine().charAt(0); 	
     	
-    	char [] arr = str.toCharArray();
+    	/*
+//    	char [] arr = str.toCharArray();
     	
     	for(int i=0; i<=str.length()-1; i++) {
-    		if(ch == arr[i]) {
+    		if(ch == str.charAt(i)) {
+//       		if(ch == arr[i]) {
     			count++;
     		}
+    	}
+    	*/
+    	// -> str.toCharArray() : 문자열을 문자 배열로!
+    	for(char s : str.toCharArray()) {
+    		if(ch == s) count ++;
     	}
 		System.out.printf("%s 안에 포함된 %s 개수 : %d", str, ch, count);
     }
@@ -109,30 +114,32 @@ class LoopPractice {
 
      */
     public void method5() {
-    	int one = 0;
-    	int two = 0;
-    	int three = 0;
-    	int four = 0;
-    	int five = 0;
-    	int six = 0;
+    	int [] dice = new int[6];
+    	 	
+    	for(int i=1; i<=10; i++) {
+        	int random = (int) (Math.random()*6);
+        	dice[random]++;
+    	}
     	
+    	for(int i=0; i<dice.length; i++) {
+    		System.out.println((i+1) + " : " + dice[i]);
+    	}
+    	
+    	/*
     	for(int i=1; i<=10; i++) {
         	int random = (int) (Math.random()*6) + 1;
         	switch (random) {
-        	case 1: ++one; break;
-        	case 2: ++two; break;
-        	case 3: ++three; break;
-        	case 4: ++four; break;
-        	case 5: ++five; break;
-        	case 6: ++six; break;
+        	case 1: dice[0]++; break;
+        	case 2: dice[1]++; break;
+        	case 3: dice[2]++; break;
+        	case 4: dice[3]++; break;
+        	case 5: dice[4]++; break;
+        	case 6: dice[5]++; break;
         	}
     	}
-    	System.out.println("1 : " + one);
-    	System.out.println("2 : " + two);
-    	System.out.println("3 : " + three);
-    	System.out.println("4 : " + four);
-    	System.out.println("5 : " + five);
-    	System.out.println("6 : " + six);
+    	for(int i=0; i<dice.length; i++)
+    		System.out.println(i+1 + " : " + dice[i]);
+    		*/
     }
 
     /*
@@ -158,80 +165,44 @@ class LoopPractice {
         이겼습니다 !
     */
     public void method6() {
-    	boolean b = true;
+    	String[] rps = {"가위", "바위", "보"};
+    	int win = 0;
+    	int lose = 0;
+    	int draw = 0;
+    	
     	System.out.print("당신의 이름을 입력해주세요 : ");
     	String name = sc.nextLine();
-    	int win = 0;
-    	int draw = 0;
-    	int lose = 0;
     	
-    	while(b) {
+    	while(true) {
         	
         	System.out.print("가위바위보 : ");
-        	String str = sc.nextLine();
+        	String input = sc.nextLine();
         	
-        	int random = (int) (Math.random()*3);
-        		
-        	switch(random) {
-        	case 0:
-        		System.out.println("컴퓨터 : 가위");
-        		if(str.equals("가위")) {
-        			System.out.printf("%s : %s\n", name, str);
-        			System.out.println("비겼습니다.\n");
+        	//배열에서 값으로 인덱스 찾기
+        	Arrays.asList(rps).indexOf(input);
+        	// 0 - 가위, 1 - 바위, 2 - 보 
+        	int computer = (int) (Math.random()*3);
+        	System.out.println("컴퓨터 : " + rps[computer]);
+        	
+        	int number = Arrays.asList(rps).indexOf(input);
+        	System.out.println(name + " : " + rps[number]);
+        		if(computer == number) {
+        			// 비겼을경우
+        			System.out.println("비겼습니다.");
         			draw++;
-        			break;
-        		} else if(str.equals("바위")) {
-        			System.out.printf("%s : %s\n", name, str);
-        			System.out.println("이겼습니다 !\n");
-        			b = false;
-        			break;
-        		} else if(str.equals("보")) {
-        			System.out.printf("%s : %s\n", name, str);
-        			System.out.println("졌습니다 ㅠㅠ\n");
-        			lose++;
-        			break;
-        		}
-        	case 1:
-        		System.out.println("컴퓨터 : 바위");
-        		if(str.equals("가위")) {
-        			System.out.printf("%s : %s\n", name,str);
-        			System.out.println("졌습니다 ㅠㅠ\n");
-        			lose++;
-        			break;
-        		} else if(str.equals("바위")) {
-        			System.out.printf("%s : %s\n", name, str);
-        			System.out.println("비겼습니다.\n");
-        			draw++;
-        			break;
-        		} else if(str.equals("보")) {
-        			System.out.printf("%s : %s\n", name, str);
-        			System.out.println("이겼습니다 !\n");
+        		} else if((number == 1 && computer ==2)
+        					|| (number == 1 && computer == 0)
+        					|| (number == 2 && computer == 1)){
+        			//이겼을 경우
+        			System.out.println("이겼습니다 !");
         			win++;
-        			b = false;
         			break;
-        		}
-        	case 2:
-        		System.out.println("컴퓨터 : 보");
-        		if(str.equals("가위")) {
-        			System.out.printf("%s : %s\n", name, str);
-        			System.out.println("이겼습니다 !\n");
-        			win++;
-        			b = false;
-        			break;
-        		} else if(str.equals("바위")) {
-        			System.out.printf("%s : %s\n", name, str);
-        			System.out.println("졌습니다 ㅠㅠ\n");
+        		} else {
+        			//졌을 경우
+        			System.out.println("졌습니다 ㅠㅠ");
         			lose++;
-        			break;
-        		} else if(str.equals("보")) {
-        			System.out.printf("%s : %s\n", name, str);
-        			System.out.println("비겼습니다.\n");
-        			draw++;
-        			break;
         		}
-        	}
     	}
-    	System.out.printf("이긴 횟수 : %s 비긴 횟수 : %s 진 횟수 : %s", win, draw, lose);
+    	System.out.println("비긴 횟수 : " + draw + ", 진 횟수 : " + lose + ", 이긴 횟수 : " + win);
     }
-
 }

@@ -43,6 +43,7 @@ public class Application {
 			System.out.print("메뉴 번호 :");
 			switch (Integer.parseInt(sc.nextLine())) {
 			case 1:
+				if(mc.count < 3) insertMember();
 				insertMember();
 				break;
 			case 2:

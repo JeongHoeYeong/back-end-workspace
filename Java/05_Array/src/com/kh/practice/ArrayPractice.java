@@ -1,6 +1,8 @@
 package com.kh.practice;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class ArrayPractice {
@@ -8,7 +10,11 @@ public class ArrayPractice {
 	
 	public static void main(String[] args) {
 		ArrayPractice a = new ArrayPractice();
-		a.method3();
+		//a.method1();
+		//a.method2();
+		//a.method3();
+		//a.method4();
+		a.method5();
 	}
 	/*
 	 * 길이가 5인 배열을 선언하고 과일 5개로 초기화 한 후 본인이 좋아하는 과일 하나를 출력하세요. (과일 5개는 뭐든지~)
@@ -16,15 +22,21 @@ public class ArrayPractice {
 	 * */
 	public void method1() {
 		
-		String[] fruit = new String[5];
-		fruit[0] = "사과";
-		fruit[1] = "배";
-		fruit[2] = "귤";
-		fruit[3] = "오렌지";
-		fruit[4] = "파인애플";
-				
+		String[] fruit = {"복숭아", "배", "귤", "오렌지", "파인애플"};
+		int num = (int) (Math.random()*5);
+	
+//		System.out.println(fruit[num]);
+			
+		// ArrayList ~~~
+		ArrayList<String> fruitList = new ArrayList<>(Arrays.asList(fruit));
+		//fruitList.add("복숭아");
+		//fruitList.add("배");
+		//fruitList.add("귤");
+		//fruitList.add("오렌지");
+		//fruitList.add("파인애플");
+		System.out.println(fruitList);
+		System.out.println(fruitList.get(num));
 		
-		System.out.println(fruit[1]);
 	}
 	
 	/*
@@ -44,14 +56,28 @@ public class ArrayPractice {
 		
 		int sum = 0;
 		System.out.print("정수 : ");
-		int[] arr = new int[sc.nextInt()];
+//		int[] arr = new int[sc.nextInt()];
+		int num = sc.nextInt();
 		
-		for(int i=0; i<=arr.length-1; i++) {
+		/*
+		for(int i=0; i<arr.length; i++) {
 			System.out.printf("배열 %d번째 인덱스에 넣을 값 : ", i);
 			arr[i] = sc.nextInt();
 			sum += arr[i];
 		}
 		System.out.println(Arrays.toString(arr));
+		*/
+		ArrayList<Integer> arrList = new ArrayList();
+		for(int i=0; i<num; i++) {
+			System.out.printf("배열 %d번째 인덱스에 넣을 값 : ", i);
+			//arrList.add(sc.nextInt());
+			//sum += arrList.get(i);
+			
+			int answer = sc.nextInt();
+			arrList.add(answer);
+			sum += answer;
+		}
+		System.out.println(arrList);
 		System.out.println(sum);
 	}
 	
@@ -62,19 +88,33 @@ public class ArrayPractice {
 	 * 
 	 * */
 	public void method3() {
-		String[] arr = {"치킨", "떡볶이", "피자"};
+		String[] menu = {"치킨", "떡볶이", "피자"};
+		// 배열 -> ArrayList
 		
-		System.out.print("배달 메뉴 : ");
-		String food = sc.nextLine();
+		ArrayList<String> menuList = new ArrayList<>(Arrays.asList(menu));
 		
-		for(int i=0; i<arr.length; i++) {
-			if(food.equals(arr[i])) {
+		System.out.print("주문하실 메뉴를 골라주세요 : ");
+		String select = sc.nextLine();
+		
+		boolean check = false;
+		
+		for(String food : menuList) {
+			if(select.equals(food)) {
+				check = true;
+			}
+		}
+		System.out.println(check ? "배달 가능" : "배달 불가능");
+		
+		/*
+		for(int i=0; i<menu.length; i++) {
+			if(select.equals(menu[i])) {
 				System.out.println("배달 가능");
 				break;
-			} else if(i == arr.length-1) {
+			} else if(i == menu.length-1) {
 				System.out.println("배달 불가능");
 			}
 		}
+		*/
 	}
 	
 	/*
@@ -87,20 +127,23 @@ public class ArrayPractice {
 	 * 
 	 * */
 	public void method4() {
-		
-		char[] arr = new char[14];
-		
+				
 		System.out.print("주민등록번호 : ");
-		arr = sc.nextLine().toCharArray();
-		char[] copy = arr.clone();
+		String no = sc.nextLine();
+		char[] charNo = no.toCharArray();
 		
-		if(arr.length==14 && arr[6] == '-') {
-			for(int i=8; i<arr.length; i++) {
-				copy[i] = '*';
+		char[] copy = charNo.clone();
+		
+		String[] strNo =  no.split("");
+		
+		ArrayList<String> noList = new ArrayList<>(Arrays.asList(strNo));
+		
+		for(int i=0; i<noList.size(); i++) {
+			if(i<=7) {
+				System.out.print(noList.get(i));
+			} else {
+				System.out.print("*");
 			}
-			System.out.println(copy);
-		} else {
-			System.out.println("잘못된 값");
 		}
 	}
 	
@@ -113,12 +156,19 @@ public class ArrayPractice {
 	 * */
 	public void method5() {
 		System.out.print("단어 입력 : ");
-		char[] arr = sc.nextLine().toCharArray();
-		char[] copy = new char[arr.length];
-		
-		for(int i = 0; i<arr.length; i++) {
-			copy[(arr.length-1)-i] = arr[i];
+		String word = sc.nextLine();
+		String[] wordArr = word.split("");
+		/*
+		for(int i = wordArr.length-1; i>=0; i--) {
+			System.out.print(wordArr[i]);
 		}
-		System.out.println(copy);
+		*/
+		
+		ArrayList<String> wordList = new ArrayList<>(Arrays.asList(wordArr));
+		
+		Collections.reverse(wordList);
+		for(String s : wordList) {
+			System.out.print(s);
+		}
 	}
 }
