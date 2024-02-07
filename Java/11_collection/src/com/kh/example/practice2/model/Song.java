@@ -1,34 +1,32 @@
 package com.kh.example.practice2.model;
 
-public class Song implements Comparable<Song>{
+public class Song {
+
 	private String title;
-	private String singer;
+	private String artist;
 	
-	public Song() {
+	public Song() {}
+	public Song(String title, String artist) {
+		this.title = title;
+		this.artist = artist;
 	}
-	public Song(String songName, String singer) {
-		this.title = songName;
-		this.singer = singer;
-	}
-	public String getSongName() {
+	
+	public String getTitle() {
 		return title;
 	}
-	public void setSongName(String songName) {
-		this.title = songName;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getSinger() {
-		return singer;
+	public String getArtist() {
+		return artist;
 	}
-	public void setSinger(String singer) {
-		this.singer = singer;
-	}
-	@Override
-	public int compareTo(Song o) {
-		return this.title.compareTo(o.title);
+	public void setArtist(String artist) {
+		this.artist = artist;
 	}
 	
 	@Override
 	public String toString() {
-		return singer + ":" + title;
+		return artist + " - " + title;
 	}
+
 }
