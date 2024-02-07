@@ -4,7 +4,6 @@ public class B_Wrapper {
 
 	public static void main(String[] args) {
 		B_Wrapper b = new B_Wrapper();
-		// b.method1(); // Boxing : 기본 자료형 -> Wrapper 클래스
 		b.method2();
 	}
 	
@@ -12,7 +11,7 @@ public class B_Wrapper {
 		double dNum1 = 3.14;
 		// Deprecated : 기능은 있지만 비권장
 		Double double1 = new Double(dNum1);
-		double1 = 3.14;
+		double1 = 3.14; // Boxing : 기본 자료형 -> Wrapper 클래스
 		
 		int iNum2 = 3;
 		Integer int1 = new Integer(iNum2);
@@ -26,8 +25,8 @@ public class B_Wrapper {
 	
 	// String과 Wrapper 클래스 간의 변경
 	public void method2() {
-		// UnBoxing : wrapper -> 기본 자료형
-		// 1. 문자열을 기본 자료형으로 변경 : parseInt()
+		// UnBoxing : Wrapper -> 기본 자료형
+		// 1. 문자열을 기본 자료형으로 변경 : parseXXX()
 		int iNum = Integer.parseInt("20");
 		double dNum = Double.parseDouble("34.78");
 		
@@ -45,6 +44,9 @@ public class B_Wrapper {
 		String str4 = Double.valueOf(dNum).toString();
 		
 		System.out.println(str3 + str4); // 2034.78
+		
+		
+		
 	}
 
 }
